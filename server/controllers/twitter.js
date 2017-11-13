@@ -47,16 +47,16 @@ export const getFavouriteList = (req, res, next) => {
     'description',
     'followers_count',
     'profile_background_image_url',
-    'profile_background_tile',
-    'profile_image_url',
-    'profile_image_url_https'
+    'profile_image_url'
   ];
 
   client.get('friends/list.json', params, (err, data, response) => {
     if (err) {
       next(err);
     }
-    res.send(filter(keys, data.users));
+    const list = data.users;
+
+    res.send(list ? filter(keys, list) : []);
   });
 };
 

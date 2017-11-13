@@ -1,0 +1,95 @@
+{
+  "name": "rqm",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "main": "webpack.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashhm/random-quote-machine.git"
+  },
+  "keywords": [
+    "api",
+    "react",
+    "redux",
+    "freecodecamp"
+  ],
+  "author": "Bulakh Sergii",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "env",
+      "react",
+      "stage-0"
+    ],
+    "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "style": true
+        }
+      ],
+      [
+        "emotion"
+      ]
+    ]
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node server/app.js",
+    "dev": "webpack-dev-server --progress --colors --hot --inline",
+    "build": "webpack",
+    "dist": "NODE_ENV=production webpack -p"
+  },
+  "dependencies": {
+    "antd": "^2.13.9",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "keymirror": "^0.1.1",
+    "less": "*",
+    "prop-types": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "react-spinners": "^0.2.1",
+    "react-test-renderer": "*",
+    "redux": "*",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "superagent": "*",
+    "superagent-no-cache": "^0.1.1",
+    "superagent-prefix": "0.0.2",
+    "superagent-use": "^0.1.0",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "autoprefixer-loader": "*",
+    "babel-cli": "*",
+    "babel-core": "*",
+    "babel-loader": "*",
+    "babel-plugin-emotion": "^8.0.10",
+    "babel-plugin-import": "^1.6.2",
+    "babel-polyfill": "*",
+    "babel-preset-env": "*",
+    "babel-preset-react": "*",
+    "babel-preset-stage-0": "*",
+    "css-loader": "*",
+    "file-loader": "*",
+    "html-webpack-plugin": "*",
+    "json-loader": "*",
+    "less-loader": "*",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.12.1",
+    "react-hot-loader": "*",
+    "react-loader": "*",
+    "scss-loader": "^0.0.1",
+    "style-loader": "*",
+    "url-loader": "*",
+    "webpack": "*",
+    "webpack-dev-server": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/Ashhm/random-quote-machine/issues"
+  },
+  "homepage": "https://github.com/Ashhm/random-quote-machine#readme"
+}
