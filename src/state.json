@@ -1,0 +1,15 @@
+{
+  "favourite": {
+    "isFetching" : false,
+    "isError": false,
+    "didInvalidate": false,
+    "lastUpdated": "10.10.10",
+    "items": []
+  },
+  "twitts": {
+    "isFetching" : false,
+    "didInvalidate": false,
+    "lastUpdated": "10.10.10",
+    "items": []
+  }
+}
