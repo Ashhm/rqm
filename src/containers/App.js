@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 //importing components/containers
 import {Layout} from 'antd';
 import HeaderContainer from '../containers/HeaderContainer';
-import ContentComponent from '../components/Content/Content';
+import ContentContainer from '../containers/ContentContainer';
 import SiderComponent from '../components/Sider/Sider';
 import FooterComponent from '../components/Footer/Footer';
 
@@ -31,7 +31,7 @@ class App extends React.Component {
             <SiderComponent/>
           </Sider>
           <Content className='ant-layout-content'>
-            <ContentComponent/>
+            <ContentContainer/>
           </Content>
         </Layout>
         <Footer className='ant-layout-footer'>

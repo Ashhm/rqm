@@ -25,9 +25,16 @@ const objectify = (filter, data) => {
   return data.map(entry => {
     return Object.keys(filter).reduce((result, key) => {
       if(filter[key]) {
-        result[key] = objectify(filter[key],
-          Array.isArray(entry[key]) ?
-            entry[key]: [entry[key]])[0];
+        //entry could be undefined
+        if(!entry[key]){
+          return result;
+        }
+        //entry can be array or object
+        const isArray = Array.isArray(entry[key]);
+
+        result[key] = isArray ?
+          objectify(filter[key], entry[key]) : objectify(filter[key], [entry[key]])[0];
+
         return result;
       }
       result[key] = entry[key];
@@ -96,7 +103,7 @@ export const deleteFavouriteList = (req, res, next) => {
 //max_id: tweets less than ID
 export const getTimelineTweets = (req, res, next) => {
   const params = {
-    count: 50,
+    count: 10,
     trim_user: true,
     exclude_replies: false
   };
@@ -119,7 +126,13 @@ export const getTimelineTweets = (req, res, next) => {
       symbols: null,
       urls: {
         url: null,
-        expanded_url: null
+        display_url: null
+      },
+      media: {
+        id: null,
+        media_url: null,
+        display_url: null,
+        type: null
       }
     },
     user: {

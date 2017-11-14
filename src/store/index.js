@@ -15,11 +15,12 @@ const initState = {
     lastUpdated: null,
     items: []
   },
-  twitts: {
+  tweets: {
     isFetching: false,
-    sError: false,
+    isError: false,
     didInvalidate: false,
     lastUpdated: null,
+    lastID: null,
     items: []
   }
 };
