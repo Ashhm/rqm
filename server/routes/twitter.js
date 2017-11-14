@@ -14,10 +14,9 @@ router.post('/favourite', twitterController.addFavouriteList);
 router.delete('/favourite/:id', twitterController.deleteFavouriteList);
 
 
-//routes to manage twitts
-router.get('/timeline', (req, res, next)=>{
-  res.send('Get twitt');
-});
+//routes to manage tweets
+router.get('/timeline', twitterController.getTimelineTweets);
+router.get('/timeline/:lastID', twitterController.getTimelineTweets);
 
 router.post('/timeline', (req, res, next)=>{
   res.send('Post fav');

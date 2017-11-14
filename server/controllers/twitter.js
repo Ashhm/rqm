@@ -18,17 +18,24 @@ const client = new Twitter({
 //follow: https://api.twitter.com/1.1/friendships/create.json
 //unfollow: https://api.twitter.com/1.1/friendships/destroy.json
 //query: skip_status=true&include_user_entities=false
+//tweets: https://api.twitter.com/1.1/statuses/home_timeline.json
 
-//filter users array
-const filter = (keys, data) => {
+//filter response: recursive write result for each entry
+const objectify = (filter, data) => {
   return data.map(entry => {
-    return Object.keys(entry).reduce((object, key) => {
-      if(keys.indexOf(key) > -1) {
-        object[key] = entry[key];
+    return Object.keys(filter).reduce((result, key) => {
+      if(filter[key]) {
+        result[key] = objectify(filter[key],
+          Array.isArray(entry[key]) ?
+            entry[key]: [entry[key]])[0];
+        return result;
       }
-      return object;
+      result[key] = entry[key];
+      return result;
     }, {})
-  });
+  })
+
+
 };
 
 //params is a query string for req and key are fields we need
@@ -40,23 +47,22 @@ export const getFavouriteList = (req, res, next) => {
     include_user_entities: false
   };
 
-  const keys = [
-    'id',
-    'name',
-    'url',
-    'description',
-    'followers_count',
-    'profile_background_image_url',
-    'profile_image_url'
-  ];
+  const filter = {
+    id: null,
+    name: null,
+    url: null,
+    description: null,
+    followers_count: null,
+    profile_background_image_url: null,
+    profile_image_url: null
+  };
 
-  client.get('friends/list.json', params, (err, data, response) => {
+  client.get('friends/list.json', params, (err, {users}, response) => {
     if (err) {
       next(err);
     }
-    const list = data.users;
 
-    res.send(list ? filter(keys, list) : []);
+    res.send(users ? objectify(filter, users) : []);
   });
 };
 
@@ -82,5 +88,51 @@ export const deleteFavouriteList = (req, res, next) => {
     if (!err) {
       res.send(tweets);
     }
+  });
+};
+
+//get timeline tweets
+//since_id: tweets greater than ID
+//max_id: tweets less than ID
+export const getTimelineTweets = (req, res, next) => {
+  const params = {
+    count: 50,
+    trim_user: true,
+    exclude_replies: false
+  };
+
+  if (req.params.lastID) {
+    params.max_id = req.params.lastID;
+  }
+
+  const filter = {
+    created_at: null,
+    id: null,
+    text: null,
+    source: null,
+    retweet_count: null,
+    favorite_count: null,
+    favorited: null,
+    retweeted: null,
+    entities: {
+      hashtags: null,
+      symbols: null,
+      urls: {
+        url: null,
+        expanded_url: null
+      }
+    },
+    user: {
+      id: null
+    }
+
+};
+
+  client.get('statuses/home_timeline.json', params, (err, data, response) => {
+    if (err) {
+      next(err);
+    }
+
+    res.send(data ? objectify(filter, data) : []);
   });
 };
