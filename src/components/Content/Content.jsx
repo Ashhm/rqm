@@ -1,16 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import ContentTabs from './ContentTabs';
 
 
+class ContentComponent extends React.Component {
+  static propTypes = {};
 
-class ContentComponent extends Component {
-  static propTypes = {
+  constructor(props) {
+    super(props);
+  }
 
-  };
+  componentDidMount() {
+    this.props.onLoad();
+  }
 
   render() {
+    const {items, isFetching} = this.props;
+
     return (
-      <div>Content</div>
+      <div>
+        <ContentTabs
+          items={items}
+          loading={isFetching}
+        />
+      </div>
     )
   }
 }

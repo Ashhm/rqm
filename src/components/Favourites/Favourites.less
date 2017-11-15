@@ -1,3 +1,5 @@
+@screen-sm: 768px;
+
 .Favourites___main {
   display: flex;
   justify-content: space-around;
@@ -18,8 +20,11 @@
     color: #108ee9;
     transition: all .5s ease-out;
   }
-  & span {
+  & .Favourites___title {
     margin: 0 3px 0 5px;
+    @media(max-width: @screen-sm) {
+      display: none;
+    }
   }
   &:hover button {
     opacity: 1;

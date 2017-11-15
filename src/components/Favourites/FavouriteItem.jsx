@@ -18,7 +18,7 @@ class FavouriteItem extends React.Component {
           src={profile_image_url}
           alt={`Avatar for ${name}`}
         />
-        <span title={description}>{name}</span>
+        <span className='Favourites___title' title={description}>{name}</span>
         <Button size='small' shape='circle' icon='link' ghost />
         <Button size='small' shape='circle' icon='close' ghost />
       </div>
